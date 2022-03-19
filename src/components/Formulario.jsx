@@ -42,6 +42,9 @@ const Formulario = ({ setPacientes, pacientes, paciente, setPaciente }) => {
       sintomas: input.sintomas,
     };
 
+    const arr = Object.values(objInput);
+    const isFill = arr.includes("");
+
     if (paciente.id) {
       objInput.id = paciente.id;
 
@@ -51,9 +54,11 @@ const Formulario = ({ setPacientes, pacientes, paciente, setPaciente }) => {
 
       setPacientes(pacientesActualizados);
       setPaciente({});
-    } else {
+    } else if (!isFill) {
       objInput.id = generarId();
       setPacientes([...pacientes, objInput]);
+    } else {
+      alert("Debe rellenar todos los campos del formulario");
     }
     setInput({
       id: "",
